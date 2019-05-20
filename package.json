@@ -1,20 +1,36 @@
 {
-  "name": "ca-cc",
+  "name": "cloud-computing-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.0.0",
+    "aws-amplify": "^1.1.28",
+    "aws-amplify-react": "^2.3.8",
+    "aws-appsync": "^1.8.0",
+    "aws-appsync-react": "^1.2.8",
+    "aws-sdk": "^2.458.0",
+    "graphql-tag": "^2.10.1",
+    "moment": "^2.22.1",
+    "react": "^16.2.0",
+    "react-apollo": "^2.5.5",
+    "react-dom": "^16.2.0",
+    "react-pose": "^2.0.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "recharts": "^1.0.0-beta.10",
+    "semantic-ui-css": "^2.2.14",
+    "semantic-ui-react": "^0.78.2",
+    "styled-components": "^3.3.0",
+    "uuid": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "production": "yarn build && serve -s -l 8080 build"
   },
   "browserslist": {
     "production": [

@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## References
+https://github.com/aws-amplify/amplify-js/wiki/Local-Development
+http://hpc.imbiplaza.net/?p=912
+locally build aws using codebuild
+https://aws.amazon.com/blogs/devops/announcing-local-build-support-for-aws-codebuild/
+# Cloud Computing Application
+---
 
-## Available Scripts
+Application that showcases how to build application with AWS cloud services.
 
-In the project directory, you can run:
+## Pre-requisites
+1. node v8.9.1 (or node carbon)
+2. yarn
+3. docker
+4. AWS Account for services's API key: Cognito, AppSync, S3, DynamoDB, Lambda, etc
 
-### `npm start`
+## How to run
+```
+For development:
+1. Update src/config.js file with AWS services API key
+2. Run `yarn start`
+3. Development side will be opened
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For production (using Docker):
+1. By default, src/config.js is using environment variables to store AWS key. Please make sure you revert any changes if you changed it in development process.
+2. Build docker image => `docker build -t <REPO_NAME>/<IMAGE_NAME> .`
+3. Create `env.list` that contain your environment variables. For example:
+    # env.list (env var need to start with REACT_APP_)
+    REACT_APP_COGNITO_1=xxxxx
+4. Run docker image => `docker run -p 8080:8080 --env-file ./env.list -d <REPO_NAME>/<IMAGE_NAME>`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+For production (static server):
+1. Update src/config.js
+2. Run `yarn build`
+3. Install `serve` => `npm install -g serve@7.1.1`
+4. Run `serve -s -l 8080 build`
+```
