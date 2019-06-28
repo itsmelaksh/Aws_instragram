@@ -1,0 +1,4 @@
+{
+	"postId": $util.toJson($context.args.postId),
+    "tags": $util.toJson($context.result)
+}

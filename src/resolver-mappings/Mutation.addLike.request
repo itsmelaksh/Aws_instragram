@@ -1,0 +1,12 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "PutItem",
+    "key" : {
+    	"username": $util.dynamodb.toDynamoDBJson($ctx.identity.username),
+        "postId": $util.dynamodb.toDynamoDBJson($ctx.args.postId),
+    },
+    
+    "attributeValues" : {
+    	"createdAt": $util.dynamodb.toDynamoDBJson($util.time.nowEpochMilliSeconds())
+    }
+}

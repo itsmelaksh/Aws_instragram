@@ -1,0 +1,4 @@
+#set ( $hasResult = $ctx.result.isEmpty() )
+#set ( $hasResult = ( $hasResult == false ) )
+
+$util.toJson($hasResult)

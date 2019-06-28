@@ -1,0 +1,11 @@
+#set( $friendUsernames = [] )
+#foreach( $item in $context.result.items )
+	$util.qr($friendUsernames.add($item.friendUsername))
+#end
+
+{
+	"username": "${context.identity.username}",
+    "followingIds": $util.toJson($friendUsernames),
+    "limit": $util.defaultIfNull(${ctx.args.limit}, 20),
+    "nextToken": $util.toJson($util.defaultIfNullOrBlank($ctx.args.nextToken, null))
+}

@@ -1,0 +1,37 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "index": "type-createdAt-index",
+    "query": {
+      "expression": "#type = :type",
+      "expressionNames": {
+        "#type": "type",
+      },
+      "expressionValues": {
+        ":type": {"S": "feed"}
+      },
+    },
+    "scanIndexForward": false,
+    
+    #set ( $expression = "" )
+    #set ( $expValues = {} )
+    #set ( $id = 0 )
+    
+    #foreach ( $entry in $ctx.source.followingIds )
+    	#set ( $entryKey = ":val_${id}" )
+        #set ( $expression = "$expression $entryKey,")
+        $!{expValues.put("$entryKey", { "S" : "${entry}" })}
+        #set ( $id = $id + 1 )
+    #end
+    
+    $!{expValues.put(":username", { "S" : "$ctx.identity.username" })}
+    
+    "filter" : {
+        "expression" : "username IN (${expression} :username )",
+        "expressionValues" : $utils.toJson($expValues),
+    },
+    
+    ## Add 'limit' and 'nextToken' arguments to this field in your schema to implement pagination. **
+    "limit": $util.defaultIfNull(${ctx.source.limit}, 20),
+    "nextToken": $util.toJson($util.defaultIfNullOrBlank($ctx.source.nextToken, null))
+}

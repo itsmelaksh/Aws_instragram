@@ -1,0 +1,130 @@
+type Feeds {
+  followingIds: [String]
+  posts: PostConnection
+  username: String
+}
+
+type FriendRelation {
+  createdAt: String
+  friendInfo: User
+  friendUsername: String!
+  userInfo: User
+  username: String!
+}
+
+type FriendRelationConnection {
+  items: [FriendRelation]
+  nextToken: String
+}
+
+type InferredTags {
+  postId: String
+  tags: String
+}
+
+type LikePost {
+  createdAt: String
+  postId: String!
+  username: String!
+}
+
+type Mutation {
+  addFriend(friendUsername: String!): FriendRelation!
+  addLike(postId: String!): LikePost!
+  addPost(caption: String, file: S3ObjectInput): Post
+  addUser(id: String): User!
+  inferPostTags(S3Bucket: String, S3Filename: String, postId: String): InferredTags
+  removeFriend(friendUsername: String!): FriendRelation!
+  removeLike(postId: String!): LikePost!
+  updateUser(bio: String, country: String, email: String, gender: String, name: String, phoneNumber: String, profilePic: S3ObjectInput): User
+}
+
+type Post {
+  caption: String
+  createdAt: String
+  file: S3Object
+  id: ID!
+  liked: Boolean
+  likes: Int!
+  profilePic: S3Object
+  tags: String
+  user: User
+  username: String
+}
+
+type PostConnection {
+  items: [Post]
+  nextToken: String
+}
+
+type Query {
+  allPosts(limit: Int, nextToken: String): PostConnection!
+  getFeeds(limit: Int, nextToken: String): Feeds!
+  getFollowers: FriendRelationConnection
+  getFriend(username: String): FriendRelation
+  getFriends: FriendRelationConnection
+  getGlobalStats: [UserStats]
+  getLoggedUserInfo: User
+  getPost(id: ID!): Post
+  getUser(username: String!): User
+  getUserPosts(limit: Int, nextToken: String): PostConnection!
+  getUserStats: UserStats
+  searchUsers(search: String): UserConnection
+}
+
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
+}
+
+type Subscription {
+  newFriend: FriendRelation
+  @aws_subscribe(mutations:["addFriend"])
+  newPost: Post
+  @aws_subscribe(mutations:["addPost"])
+  newTags: InferredTags
+  @aws_subscribe(mutations:["inferPostTags"])
+  removeFriend: FriendRelation
+  @aws_subscribe(mutations:["removeFriend"])
+}
+
+type User {
+  bio: String
+  country: String
+  createdAt: String
+  email: String
+  followed: Boolean
+  followers(limit: Int, nextToken: String): UserConnection
+  followersCount: Int
+  following(limit: Int, nextToken: String): UserConnection
+  followingCount: Int
+  gender: String
+  name: String
+  phoneNumber: String
+  posts(limit: Int, nextToken: String): PostConnection
+  postsCount: Int
+  profilePic: S3Object
+  username: String!
+}
+
+type UserConnection {
+  items: [User]
+  nextToken: String
+}
+
+type UserStats {
+  followers_count: Int
+  friends_count: Int
+  posts: [Post]
+  posts_count: Int
+  username: String!
+}
+
+input S3ObjectInput {
+  bucket: String!
+  key: String
+  localUri: String
+  mimeType: String
+  region: String!
+}

@@ -1,0 +1,12 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "index" : "username-createdAt-index",
+    "query" : {
+        ## Provide a query expression. **
+        "expression": "username = :username",
+        "expressionValues" : {
+            ":username" : $util.dynamodb.toDynamoDBJson($ctx.source.username)
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "cloud-computing-app-deployments",
+    "Key": "mydockercfg"
+  },
+  "Image": {
+    "Name": "eduardchai/cloud-computing-app:<TAG>",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8080"
+    }
+  ]
+}

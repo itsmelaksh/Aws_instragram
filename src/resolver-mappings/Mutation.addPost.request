@@ -1,0 +1,16 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "PutItem",
+    "key" : {
+        ## If object "id" should come from GraphQL arguments, change to $util.dynamodb.toDynamoDBJson($ctx.args.id)
+        "id": $util.dynamodb.toDynamoDBJson($util.autoId()),
+    },
+    
+    #set( $attribs = $util.dynamodb.toMapValues($ctx.args))
+    #set( $attribs.username = $util.dynamodb.toDynamoDB($util.defaultIfNullOrBlank($context.identity.username, "ANON")))
+    #set( $attribs.file = $util.dynamodb.toS3Object($ctx.args.file.key, $ctx.args.file.bucket, $ctx.args.file.region))
+    #set( $attribs.createdAt = $util.dynamodb.toDynamoDB($util.time.nowEpochMilliSeconds()))
+    #set( $attribs.type = $util.dynamodb.toDynamoDB("feed"))
+    
+    "attributeValues" : $util.toJson($attribs)
+}

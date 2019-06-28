@@ -1,0 +1,12 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "query" : {
+        ## Provide a query expression. **
+        "expression": "username = :username AND friendUsername = :friendUsername",
+        "expressionValues" : {
+            ":username" : $util.dynamodb.toDynamoDBJson($ctx.identity.username),
+            ":friendUsername" : $util.dynamodb.toDynamoDBJson($ctx.source.username)
+        }
+    }
+}

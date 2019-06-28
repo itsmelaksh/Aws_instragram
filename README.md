@@ -3,6 +3,11 @@ https://github.com/aws-amplify/amplify-js/wiki/Local-Development
 http://hpc.imbiplaza.net/?p=912
 locally build aws using codebuild
 https://aws.amazon.com/blogs/devops/announcing-local-build-support-for-aws-codebuild/
+/Users/nityamadhwal/bin/aws
+https://github.com/nater1067/my-money-manager-frontend
+sioq0eaab0mm50tkh8aeqsg8hren715mnv4vk12p7a6g5ht8lhg
+https://ap-southeast-1.console.aws.amazon.com/appsync/home?region=ap-southeast-1#/ia2lzxfzb5h75b4am4eerr62we/v1/home
+https://www.youtube.com/watch?v=rVj3zc30-8E
 # Cloud Computing Application
 ---
 

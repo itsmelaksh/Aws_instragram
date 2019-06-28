@@ -1,0 +1,19 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "index": "username-createdAt-index",
+    "query": {
+      "expression": "#username = :username",
+      "expressionNames": {
+        "#username": "username",
+      },
+      "expressionValues": {
+        ":username": {"S": "${context.identity.username}"},
+      },
+    },
+    "scanIndexForward": false,
+    
+    ## Add 'limit' and 'nextToken' arguments to this field in your schema to implement pagination. **
+    "limit": $util.defaultIfNull(${ctx.args.limit}, 20),
+    "nextToken": $util.toJson($util.defaultIfNullOrBlank($ctx.args.nextToken, null))
+}

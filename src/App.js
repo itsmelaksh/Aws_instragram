@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { useState } from 'react';
+//import { useState } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 
@@ -13,7 +13,7 @@ import { ApolloProvider } from 'react-apollo';
 
 
 //Amplify
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { Auth }  from 'aws-amplify';
 
 // Components
 import Router from './Router';
@@ -32,7 +32,7 @@ const client = new AWSAppSyncClient({
     type: config.aws_appsync_authenticationType,
 
     // API_KEY
-    apiKey: 'some_key',
+    apiKey: 'da2-aq3r4swg3fb6thmkpwt6jy525y',
 
     // AWS_IAM
     credentials: () => Auth.currentCredentials(),
@@ -64,6 +64,7 @@ export default () => (
     </Rehydrated>
   </ApolloProvider>
 );
+
 
 /*
 class App extends Component {
