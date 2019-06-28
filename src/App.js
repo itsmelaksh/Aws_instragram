@@ -7,6 +7,7 @@ import 'semantic-ui-css/semantic.min.css'
 import config from './config';
 
 //AppSync and Apollo libraries
+//Laxman Singh found out this
 import AWSAppSyncClient from "aws-appsync";
 import { Rehydrated } from 'aws-appsync-react';
 import { ApolloProvider } from 'react-apollo';
